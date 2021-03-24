@@ -40,27 +40,29 @@ void ArrayList::Add(Element e) {
 }
 
 void ArrayList::Insert(int index, Element e) {
-  if (index != 0 && index != size_) {
-      for (int i = capacity_+1; i < index; i--) {
-          data_[i]=data_[i-1];
-      }
-      data_[index] = e;
-    // index = 0 и index == size это особые случаи, при которых всегда можно выполнить операцию вставки
+
+    assert(size_ < capacity_);  // я ни в коем случае не дам вам совершить ошибку всей вашей жизни
     internal::check_out_of_range(index, 0, size_);
-  }
 
   // Tip 1: используйте метод resize(new_capacity) для расширения емкости массива
   // напишите свой код здесь ...
-
-  assert(size_ < capacity_);  // я ни в коем случае не дам вам совершить ошибку всей вашей жизни
+  if(size_==capacity_)
+      resize(capacity_+ kCapacityGrowthCoefficient);
 
   // Tip 2: для свдига элементов вправо можете использовать std::copy
   // напишите свой код после расширения емкости массива здесь ...
+    if (index != size_) {
+        std::copy(data_+index,data_+size_,data_+index+1);
+        // index = 0 и index == size это особые случаи, при которых всегда можно выполнить операцию вставки
+    }
+    data_[index]=e;
+    size_++;
 }
 
 void ArrayList::Set(int index, Element value) {
   internal::check_out_of_range(index, 0, size_);
   // напишите свой код здесь ...
+  data_[index]=value;
 }
 
 Element ArrayList::Remove(int index) {
@@ -69,23 +71,33 @@ Element ArrayList::Remove(int index) {
   // Tip 1: можете использовать std::copy для сдвига элементов влево
   // Tip 2: не забудьте задать значение Element::UNINITIALIZED освободившейся ячейке
   // напишите свой код здесь ...
-  return {};
+    Element result = data_[index];
+    std::copy(data_+index,data_+size_,data_+index-1);
+    data_[size_-1] = Element ::UNINITIALIZED;
+    size_--;
+    return result;
 }
 
 void ArrayList::Clear() {
   // Tip 1: можете использовать std::fill для заполнения ячеек массива значением  Element::UNINITIALIZED
   // напишите свой код здесь ...
+    std::fill(data_, data_ + size_, Element::UNINITIALIZED);
+    size_=0;
 }
 
 Element ArrayList::Get(int index) const {
   internal::check_out_of_range(index, 0, size_);
   // напишите свой код здесь ...
-  return {};
+  return data_[index];
 }
 
 int ArrayList::IndexOf(Element e) const {
   // напишите свой код здесь ...
-  return {};
+    for (int i = 0; i < size_; ++i) {
+        if(data_[i]==e)
+            return i;
+    }
+  return kNotFoundElementIndex;
 }
 
 // === РЕАЛИЗОВАНО ===
