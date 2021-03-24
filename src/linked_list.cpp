@@ -6,16 +6,27 @@
 #include "private/internal.hpp"  // это не тот приват, о котором вы могли подумать
 
 namespace itis {
-
-    // Tip 1: создайте узел в куче со переданным значением
-    // Tip 2: есть 2 случая - список пустой и непустой
-    // Tip 3: не забудьте обновить поля head и tail
-    // напишите свой код здесь ...
 void LinkedList::Add(Element e) {
+
+        // Tip 1: создайте узел в куче со переданным значением
+        // Tip 2: есть 2 случая - список пустой и непустой
+        // Tip 3: не забудьте обновить поля head и tail
+        // напишите свой код здесь ...
 
   Node* element = new Node(e, nullptr);
 
-  if(head_ == nullptr){
+
+        Node *node = new Node(e, nullptr);
+        if (head_ == nullptr) {
+            assert(tail_ == nullptr && size_ == 0);
+            head_ = node;
+            tail_ = node;
+        } else {
+            tail_ -> next = node;
+            tail_ = node;
+        }
+        size_++;
+  /*if(head_ == nullptr){
       assert(tail_ == nullptr && size_ == 0);
       head_ = element;
       tail_ = element;
@@ -25,7 +36,7 @@ void LinkedList::Add(Element e) {
       tail_ = element;
   }
 
-  size_++;
+  size_++;*/
 
 }
 
