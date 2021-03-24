@@ -13,9 +13,10 @@ namespace itis {
     // напишите свой код здесь ...
 void LinkedList::Add(Element e) {
 
-  Node* element = new Node(e, NULL);
+  Node* element = new Node(e, nullptr);
 
   if(head_ == nullptr){
+      assert(tail_ == nullptr && size_ == 0);
       head_ = element;
       tail_ = element;
   }
@@ -64,7 +65,6 @@ void LinkedList::Set(int index, Element e) {
   internal::check_out_of_range(index, 0, size_);
     Node *newNode = find_node(index);
     newNode->data = e;
-  find_node(index-1)->next = newNode;
 }
 
     // Tip 1: рассмотрите случай, когда удаляется элемент в начале списка
@@ -73,15 +73,16 @@ void LinkedList::Set(int index, Element e) {
 Element LinkedList::Remove(int index) {
   internal::check_out_of_range(index, 0, size_);
   Node *result;
-  if (size_==1){
+  if (index==0){
       result = head_;
-      delete(head_);
+      head_=head_->next;
   } else{
       Node* previous = find_node(index-1);
       result = find_node(index);
       previous->next = result->next;
   }
   Element  elem = result->data;
+  size_--;
   delete(result);
   return elem;
 }
@@ -92,6 +93,9 @@ void LinkedList::Clear() {
     for (int i = 0; i < size_; ++i) {
         Remove(0);
     }
+    size_=0;
+    head_= nullptr;
+    tail_= nullptr;
 }
 
     // напишите свой код здесь ...
