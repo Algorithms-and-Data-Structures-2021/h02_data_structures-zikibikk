@@ -21,9 +21,13 @@ int main(int argc, char **argv) {
   linkedList->Add(Element::SECRET_BOX);
   linkedList->Add(Element::SECRET_BOX);
 
-    linkedList->Insert(5,Element::DRAGON_BALL);
-    linkedList->Set(,Element::DRAGON_BALL);
-  std::cout << linkedList->IndexOf(Element :: DRAGON_BALL);
-  
+
+  linkedList->Remove(2);
+  std::cout << linkedList->IndexOf(Element :: BEAUTIFUL_FLOWERS);
+  linkedList->Clear();
+    //std::cout << linkedList->IndexOf(Element :: BEAUTIFUL_FLOWERS);
+
+
+
   return 0;
 }
