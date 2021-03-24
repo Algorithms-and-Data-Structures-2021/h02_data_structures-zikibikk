@@ -57,6 +57,7 @@ void LinkedList::Insert(int index, Element e) {
           oldNode->next = newNode;
       }
   }
+  size_++;
 }
 
     // Tip 1: используйте функцию find_node(index)
@@ -101,15 +102,23 @@ void LinkedList::Clear() {
     // напишите свой код здесь ...
 Element LinkedList::Get(int index) const {
   internal::check_out_of_range(index, 0, size_);
+  if(index==0)
+      return head_->data;
+  if(index == size_-1)
+      return tail_->data;
 
-  Node* result = find_node(index);
+  Node* result = head_;
+    for (int i = 1; i < index; ++i) {
+        result = result->next;
+    }
+
   return result->data;
 }
 
     // напишите свой код здесь ...
 int LinkedList::IndexOf(Element e) const {
     Node* result = head_;
-    for (int i = 0; i < size_; i++) {
+    for (int i = 0; i < size_; ++i) {
         if(result->data==e)
             return i;
         result = result->next;
@@ -128,7 +137,7 @@ Node *LinkedList::find_node(int index) const {
         return tail_;
 
     Node* result = head_;
-    for (int i = 1; i < index+1; i++) {
+    for (int i = 1; i < index+1; ++i) {
         result = result->next;
     }
     return result;

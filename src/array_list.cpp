@@ -33,10 +33,18 @@ void ArrayList::Add(Element e) {
   assert(size_ < capacity_);  // я здесь, чтобы не дать тебе сойти с правильного пути
 
   // напишите свой код после расширения емкости массива здесь ...
+  if(size_==capacity_)
+      resize(capacity_+kCapacityGrowthCoefficient);
+  data_[size_] = e;
+  size_++;
 }
 
 void ArrayList::Insert(int index, Element e) {
   if (index != 0 && index != size_) {
+      for (int i = capacity_+1; i < index; i--) {
+          data_[i]=data_[i-1];
+      }
+      data_[index] = e;
     // index = 0 и index == size это особые случаи, при которых всегда можно выполнить операцию вставки
     internal::check_out_of_range(index, 0, size_);
   }
