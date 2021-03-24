@@ -34,7 +34,7 @@ struct LinkedList {
 
  private:
   // поля структуры
-  int size_{0};          // кол-во узлов в списке
+  int size_{0};          // кол-во узлов в списке?=
   Node *head_{nullptr};  // первый узел
   Node *tail_{nullptr};  // последний узел
 

@@ -12,6 +12,7 @@ enum class Element {
   UNINITIALIZED  // специальное значение, обозначающее отсутствие элемента
 };
 
+
 // внутренние проверки
 static_assert(static_cast<int>(Element::UNINITIALIZED) == 5, "Enum class Element contains too many values");
 
