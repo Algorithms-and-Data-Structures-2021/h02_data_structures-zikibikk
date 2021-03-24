@@ -8,16 +8,18 @@
 
 namespace itis {
 
-/*ArrayList::ArrayList(int capacity) : capacity_{capacity} {
+ArrayList::ArrayList(int capacity) : capacity_{capacity} {
   if (capacity <= 0) {
     throw std::invalid_argument("ArrayList::capacity must be positive");
   }
 
 
-  ArrayList
   // Tip 1: используйте std::fill для заполнения выделенных ячеек массива значением Element::UNINITIALIZED
   // здесь должен быть ваш код ...
-}*/
+  size_=0;
+  data_=new Element[capacity_];
+  std::fill(&data_[0], &data_[capacity_], Element::UNINITIALIZED);
+}
 
 ArrayList::~ArrayList() {
   // Tip 1: высвободите выделенную память

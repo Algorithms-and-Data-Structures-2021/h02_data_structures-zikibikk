@@ -13,7 +13,7 @@ add_library(adt_lib STATIC
         include/element.hpp
         include/private/internal.hpp
         src/array_list.cpp include/array_list.hpp
-        src/linked_list.cpp include/linked_list.hpp)
+        src/linked_list.cpp include/linked_list.hpp src/list.cpp)
 
 target_include_directories(adt_lib PUBLIC ${PROJECT_SOURCE_DIR}/include)
 

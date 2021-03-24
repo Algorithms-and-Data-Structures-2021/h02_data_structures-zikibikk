@@ -27,7 +27,5 @@ int main(int argc, char **argv) {
   linkedList->Clear();
     //std::cout << linkedList->IndexOf(Element :: BEAUTIFUL_FLOWERS);
 
-
-
   return 0;
 }
