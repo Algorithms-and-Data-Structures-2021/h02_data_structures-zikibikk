@@ -6,27 +6,16 @@
 #include "private/internal.hpp"  // это не тот приват, о котором вы могли подумать
 
 namespace itis {
-void LinkedList::Add(Element e) {
 
-        // Tip 1: создайте узел в куче со переданным значением
-        // Tip 2: есть 2 случая - список пустой и непустой
-        // Tip 3: не забудьте обновить поля head и tail
-        // напишите свой код здесь ...
+    // Tip 1: создайте узел в куче со переданным значением
+    // Tip 2: есть 2 случая - список пустой и непустой
+    // Tip 3: не забудьте обновить поля head и tail
+    // напишите свой код здесь ...
+void LinkedList::Add(Element e) {
 
   Node* element = new Node(e, nullptr);
 
-
-        Node *node = new Node(e, nullptr);
-        if (head_ == nullptr) {
-            assert(tail_ == nullptr && size_ == 0);
-            head_ = node;
-            tail_ = node;
-        } else {
-            tail_ -> next = node;
-            tail_ = node;
-        }
-        size_++;
-  /*if(head_ == nullptr){
+  if(head_ == nullptr){
       assert(tail_ == nullptr && size_ == 0);
       head_ = element;
       tail_ = element;
@@ -36,7 +25,7 @@ void LinkedList::Add(Element e) {
       tail_ = element;
   }
 
-  size_++;*/
+  size_++;
 
 }
 
@@ -112,23 +101,15 @@ void LinkedList::Clear() {
     // напишите свой код здесь ...
 Element LinkedList::Get(int index) const {
   internal::check_out_of_range(index, 0, size_);
-  if(index==0)
-      return head_->data;
-  if(index == size_-1)
-      return tail_->data;
 
-  Node* result = head_;
-    for (int i = 1; i < index; ++i) {
-        result = result->next;
-    }
-
+  Node* result = find_node(index);
   return result->data;
 }
 
     // напишите свой код здесь ...
 int LinkedList::IndexOf(Element e) const {
     Node* result = head_;
-    for (int i = 0; i < size_; ++i) {
+    for (int i = 0; i < size_; i++) {
         if(result->data==e)
             return i;
         result = result->next;
@@ -147,7 +128,7 @@ Node *LinkedList::find_node(int index) const {
         return tail_;
 
     Node* result = head_;
-    for (int i = 1; i < index+1; ++i) {
+    for (int i = 1; i < index+1; i++) {
         result = result->next;
     }
     return result;
