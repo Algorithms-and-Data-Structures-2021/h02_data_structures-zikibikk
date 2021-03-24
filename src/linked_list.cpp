@@ -48,9 +48,6 @@ void LinkedList::Insert(int index, Element e) {
       if(index==0){
           newNode = new Node(e,head_);
           head_=newNode;
-      } else if(index==size_-1){
-          newNode = new Node(e,tail_);
-          tail_=newNode;
       } else{
           Node *oldNode = find_node(index-1);
           newNode = new Node(e, oldNode->next);
